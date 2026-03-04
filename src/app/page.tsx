@@ -80,7 +80,7 @@ export default function Home() {
           style={{ animationDelay: "4.8s", animationDuration: "0.6s" }}
         />
 
-        {/* email signup */}
+        {/* email signup — uncomment when ready
         <div
           className="animate-fade-in flex flex-col items-center gap-6 opacity-0"
           style={{ animationDelay: "5.2s" }}
@@ -99,6 +99,7 @@ export default function Home() {
             </button>
           </div>
         </div>
+        */}
       </div>
 
       {/* bottom bar */}
