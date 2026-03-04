@@ -76,7 +76,7 @@ export default function Home() {
 
         {/* dot divider */}
         <div
-          className="animate-fade-in size-[3px] rounded-full bg-krnl-faint opacity-0"
+          className="animate-fade-in size-0.75 rounded-full bg-krnl-faint opacity-0"
           style={{ animationDelay: "4.8s", animationDuration: "0.6s" }}
         />
 
