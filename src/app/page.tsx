@@ -1,65 +1,121 @@
-import Image from "next/image";
+import type { CSSProperties } from "react";
+
+const LOGO = "krnl inc";
+// [duration, delay] in seconds — primes avoid visible sync
+const FLICKER: Array<[number, number] | null> = [
+  [4.7, 3.2], // k
+  [6.3, 4.1], // r
+  [5.1, 3.6], // n
+  [7.7, 4.8], // l
+  null, //       (space)
+  [5.9, 3.9], // i
+  [8.3, 4.4], // n
+  [6.7, 3.5], // c
+];
+
+const logoChars = Array.from(LOGO).map((ch, i) => {
+  const t = FLICKER[i];
+  return (
+    <span
+      key={i}
+      className={`lchar${ch === " " ? " space" : ""}`}
+      style={
+        t
+          ? ({
+              "--f-dur": `${t[0]}s`,
+              "--f-delay": `${t[1]}s`,
+            } as CSSProperties)
+          : undefined
+      }
+    >
+      {ch === " " ? "\u00A0" : ch}
+    </span>
+  );
+});
+
+const TAGLINE = "the kernel of intelligence";
+const SUBTITLE = "something is compiling \u2014 stay tuned";
+const TAGLINE_START = 2200;
+const TAGLINE_CHAR_DELAY = 55;
+const SUB_CHAR_DELAY = 30;
+const SUB_START = TAGLINE_START + TAGLINE.length * TAGLINE_CHAR_DELAY + 400;
+
+const renderChars = (text: string, baseDelay: number, charDelay: number) =>
+  Array.from(text).map((ch, i) => (
+    <span
+      key={i}
+      className={`char${ch === " " ? " space" : ""}`}
+      style={{ animationDelay: `${baseDelay + i * charDelay}ms` }}
+    >
+      {ch === " " ? "\u00A0" : ch}
+    </span>
+  ));
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="relative flex h-screen flex-col items-center justify-center overflow-hidden font-mono">
+      {/* scan line */}
+      <div className="animate-scan pointer-events-none fixed inset-x-0 top-0 z-50 h-px bg-linear-to-r from-transparent via-krnl-faint to-transparent opacity-0" />
+
+      <div className="relative z-10 flex flex-col items-center gap-12 px-6">
+        {/* logo */}
+        <div className="text-[13px] font-medium uppercase tracking-[0.45em] text-krnl-accent">
+          {logoChars}
+        </div>
+
+        {/* tagline area */}
+        <div className="flex min-h-20 flex-col items-center gap-5 text-center">
+          <div className="tagline-text text-[clamp(24px,4vw,42px)] font-light leading-[1.3] tracking-[-0.01em] text-krnl-text">
+            {renderChars(TAGLINE, TAGLINE_START, TAGLINE_CHAR_DELAY)}
+            <span className="cursor" />
+          </div>
+          <div className="sub-text text-[13px] font-light uppercase tracking-[0.15em] text-krnl-dim">
+            {renderChars(SUBTITLE, SUB_START, SUB_CHAR_DELAY)}
+          </div>
+        </div>
+
+        {/* dot divider */}
+        <div
+          className="animate-fade-in size-[3px] rounded-full bg-krnl-faint opacity-0"
+          style={{ animationDelay: "4.8s", animationDuration: "0.6s" }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        {/* email signup */}
+        <div
+          className="animate-fade-in flex flex-col items-center gap-6 opacity-0"
+          style={{ animationDelay: "5.2s" }}
+        >
+          <div className="flex items-center overflow-hidden rounded-[2px] border border-krnl-faint transition-colors focus-within:border-krnl-dim">
+            <input
+              type="email"
+              placeholder="enter your email"
+              className="w-[260px] bg-transparent px-4 py-3 font-mono text-xs font-light tracking-wider text-krnl-text outline-none placeholder:text-krnl-faint"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <button
+              type="button"
+              className="cursor-pointer border-l border-krnl-faint bg-transparent px-5 py-3 font-mono text-[11px] font-normal uppercase tracking-[0.2em] text-krnl-dim transition-colors hover:bg-krnl-accent/5 hover:text-krnl-text"
+            >
+              notify me
+            </button>
+          </div>
         </div>
-      </main>
+      </div>
+
+      {/* bottom bar */}
+      <div
+        className="animate-fade-in fixed inset-x-0 bottom-0 z-10 flex items-center justify-between px-10 py-6 text-[11px] font-light uppercase tracking-widest text-krnl-faint opacity-0"
+        style={{ animationDelay: "5.6s", animationDuration: "0.6s" }}
+      >
+        <span>© 2025 krnl inc</span>
+        <a
+          href="https://x.com/arashx07"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="no-underline transition-colors hover:text-krnl-dim"
+        >
+          contact
+        </a>
+      </div>
     </div>
   );
 }
