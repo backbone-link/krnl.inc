@@ -65,7 +65,7 @@ export default function Home() {
 
         {/* tagline area */}
         <div className="flex min-h-20 flex-col items-center gap-5 text-center">
-          <div className="tagline-text text-[clamp(24px,4vw,42px)] font-light leading-[1.3] tracking-[-0.01em] text-krnl-text">
+          <div className="tagline-text text-[clamp(18px,4vw,42px)] font-light leading-[1.3] tracking-[-0.01em] text-krnl-text">
             {renderChars(TAGLINE, TAGLINE_START, TAGLINE_CHAR_DELAY)}
             <span className="cursor" />
           </div>
