@@ -3,14 +3,14 @@ import type { CSSProperties } from "react";
 const LOGO = "krnl inc";
 // [duration, delay] in seconds — primes avoid visible sync
 const FLICKER: Array<[number, number] | null> = [
-  [4.7, 3.2], // k
-  [6.3, 4.1], // r
-  [5.1, 3.6], // n
-  [7.7, 4.8], // l
+  [4.7, 2.0], // k
+  [6.3, 2.8], // r
+  [5.1, 2.4], // n
+  [7.7, 3.2], // l
   null, //       (space)
-  [5.9, 3.9], // i
-  [8.3, 4.4], // n
-  [6.7, 3.5], // c
+  [5.9, 2.6], // i
+  [8.3, 3.0], // n
+  [6.7, 2.2], // c
 ];
 
 const logoChars = Array.from(LOGO).map((ch, i) => {
@@ -35,10 +35,10 @@ const logoChars = Array.from(LOGO).map((ch, i) => {
 
 const TAGLINE = "the kernel of intelligence";
 const SUBTITLE = "something is compiling \u2014 stay tuned";
-const TAGLINE_START = 2200;
-const TAGLINE_CHAR_DELAY = 55;
-const SUB_CHAR_DELAY = 30;
-const SUB_START = TAGLINE_START + TAGLINE.length * TAGLINE_CHAR_DELAY + 400;
+const TAGLINE_START = 1200;
+const TAGLINE_CHAR_DELAY = 40;
+const SUB_CHAR_DELAY = 22;
+const SUB_START = TAGLINE_START + TAGLINE.length * TAGLINE_CHAR_DELAY + 300;
 
 const renderChars = (text: string, baseDelay: number, charDelay: number) =>
   Array.from(text).map((ch, i) => (
@@ -77,7 +77,7 @@ export default function Home() {
         {/* dot divider */}
         <div
           className="animate-fade-in size-0.75 rounded-full bg-krnl-faint opacity-0"
-          style={{ animationDelay: "4.8s", animationDuration: "0.6s" }}
+          style={{ animationDelay: "3.2s", animationDuration: "0.6s" }}
         />
 
         {/* email signup — uncomment when ready
@@ -105,7 +105,7 @@ export default function Home() {
       {/* bottom bar */}
       <div
         className="animate-fade-in fixed inset-x-0 bottom-0 z-10 flex items-center justify-between px-10 py-6 text-[11px] font-light uppercase tracking-widest text-krnl-faint opacity-0"
-        style={{ animationDelay: "5.6s", animationDuration: "0.6s" }}
+        style={{ animationDelay: "3.8s", animationDuration: "0.6s" }}
       >
         <span>© 2025 krnl inc</span>
         <a

@@ -119,17 +119,17 @@ body::after {
 .lchar {
   display: inline-block;
   animation:
-    fade-in 0.8s ease-out 1.6s both,
-    flicker var(--f-dur, 6s) ease-in-out var(--f-delay, 3.2s) infinite;
+    fade-in 0.6s ease-out 0.8s both,
+    flicker var(--f-dur, 6s) ease-in-out var(--f-delay, 2.0s) infinite;
 }
 
 .lchar.space {
   width: 0.35em;
-  animation: fade-in 0.8s ease-out 1.6s both;
+  animation: fade-in 0.6s ease-out 0.8s both;
 }
 
 .animate-scan {
-  animation: scan 4s ease-in-out 0.5s forwards;
+  animation: scan 3s ease-in-out 0.3s forwards;
 }
 
 .animate-fade-in {
@@ -145,11 +145,11 @@ body::after {
 }
 
 .tagline-text .char {
-  animation: char-reveal 0.4s ease-out both;
+  animation: char-reveal 0.3s ease-out both;
 }
 
 .sub-text .char {
-  animation: sub-char-reveal 0.3s ease-out both;
+  animation: sub-char-reveal 0.25s ease-out both;
 }
 
 .sub-text .char.space {
@@ -163,7 +163,7 @@ body::after {
   height: 1em;
   background: var(--color-krnl-accent);
   margin-left: 2px;
-  vertical-align: text-bottom;
+  vertical-align: middle;
   opacity: 0;
-  animation: blink 0.9s ease-in-out 2.2s 3;
+  animation: blink 0.9s ease-in-out 1.2s 3;
 }
